@@ -1,0 +1,73 @@
+-- ObsidianUI 学习示例 黑曜石UI
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/230000156/ObsidianUI/main/ObsidianUI.lua"))()
+
+local Window = Library:CreateWindow({
+    Title = "Ohio Automation | lyy Publicity",
+    Icon = "rbxassetid://7733920640",
+    Size = UDim2.new(0, 540, 0, 380),
+})
+
+local MainTab = Window:AddTab("主功能")
+
+-- 挂机瞬移
+MainTab:AddToggle({
+    Name = "挂机瞬移(K键切换)",
+    Default = true,
+    Callback = function(state)
+        idleTeleportEnabled = state
+    end
+})
+
+-- 自动拾取气球
+MainTab:AddToggle({
+    Name = "自动拾取气球",
+    Default = true,
+    Callback = function(state)
+        _G.autoBalloon = state
+    end
+})
+
+-- 自动捡现金
+MainTab:AddToggle({
+    Name = "自动捡现金",
+    Default = true,
+    Callback = function(state)
+        _G.autoCash = state
+    end
+})
+
+-- 自动ATM爆破
+MainTab:AddToggle({
+    Name = "自动ATM爆破",
+    Default = true,
+    Callback = function(state)
+        _G.autoATM = state
+    end
+})
+
+-- 自动银行抢劫
+MainTab:AddToggle({
+    Name = "自动银行抢劫",
+    Default = true,
+    Callback = function(state)
+        _G.autoBank = state
+    end
+})
+
+-- 一键重新购买黑面巾
+MainTab:AddButton({
+    Name = "重新购买黑面巾",
+    Callback = function()
+        task.spawn(maskRoutine)
+    end
+})
+
+local InfoTab = Window:AddTab("信息")
+InfoTab:AddLabel("脚本：lyy Publicity")
+InfoTab:AddLabel("快捷键 K：切换挂机瞬移")
+InfoTab:AddLabel("⚠️仅用于代码学习，游戏注入会封号")
+
+-- 快捷键绑定
+Library:AddKeybind("UI开关", Enum.KeyCode.RightControl, function()
+    Window:Toggle()
+end)
